@@ -31,12 +31,14 @@ public class sqrtFind {
             double d=(double)lend-1;
         for(int i=0;i<p;i++){
             inc/=10;
-            while(d*d<n){
+            while(d*d<=n){
                 d+=inc;
                 System.out.println("d" +d);
                 System.out.println("inc "+inc);
             }
             d-=inc;
+            if(d*d==n) break;
+            
         }
         //rounding off
         System.out.printf("Prceision %.2f",d);

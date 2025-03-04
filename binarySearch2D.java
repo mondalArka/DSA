@@ -76,9 +76,8 @@ public class binarySearch2D {
         int decr = 1;
         int c = arr[r].length - decr;
         int index = -1;
-        while (c >= 0 && r <= arr.length - 1) {
+        while (c > 0 && r <= arr.length - 1) {
             c = arr[r].length - decr;
-            System.out.println(r + " " + c);
             if (n > arr[r][c])
                 r += 1;
 

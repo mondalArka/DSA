@@ -6,7 +6,7 @@ public class binarySearch2D {
         rowAndColumn(); // staircase way
     }
 
-    static void rowWise() throws IOException { // when the array is sorted only for row wise
+    static void rowWise() throws IOException { // when the array is sorted only for row wise complexity- log n + log n
         int[][] arr = {
                 { 5, 12, 19, 23 },
                 { 34, 45, 56, 62 },
@@ -61,7 +61,7 @@ public class binarySearch2D {
             System.out.println("Element found at index " + r + "," + c);
     }
 
-    static void rowAndColumn() throws IOException { // staircase way of seraching in 2D
+    static void rowAndColumn() throws IOException { // staircase way of seraching in 2D complexity-2n
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Enter the number");
         int n = Integer.parseInt(br.readLine());

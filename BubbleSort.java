@@ -1,20 +1,6 @@
 public class BubbleSort { //  check two adjacent elements every time
     public static void main(String[] args) {
-        int[] arr = { 13,12, 5, 3, 4,16, 8, 6, 9, 7, 11,2 };
-        int min;
-        for(int i=0;i<arr.length;i++){
-            min=arr[i];
-            for(int j=i;j<arr.length;j++){
-                if(min>arr[j]){
-                    System.out.println(min);
-                    min=arr[j];
-                    arr[j]=arr[i];
-                    arr[i]=min;
-                }
-                for(int val:arr) System.out.print(val+", ");
-                System.out.println();    
-            }
-        }
+        int[] arr = { 20,30,20,10,40 };
 
         for(int i=0;i<arr.length;i++){
             for(int j=0;j<arr.length-1;j++){

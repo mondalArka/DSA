@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class PrimeNoForrange {
-    public static void main(String[] args)throws IOException { // Sieve Erothenesis process complexity n*log(log n) maybe sieve atkins value is close
+    public static void main(String[] args)throws IOException { // Sieve Erothenesis process complexity n*log(log n) maybe sieve atkins value is close. this is the actual sieve atkins process so n/log(log n)
             int c=0;
             int k=0;
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

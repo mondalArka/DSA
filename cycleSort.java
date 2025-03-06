@@ -12,7 +12,7 @@ public class cycleSort {
                     System.out.print(val + ", ");
                 System.out.println("before "+j);
                 int correctIndex = arr[i];
-                if (arr[i]!= i) {
+                if (j!=j+1) {
                     int temp = arr[i];
                     arr[i] = arr[correctIndex];
                     arr[correctIndex] = temp;

@@ -3,13 +3,6 @@ import java.util.Arrays;
 public class setMismatch{
     public static void main(String[] args){
         int[] arr = {7,8,9,10,11,12};
-        int min=arr[0];
-        for(int i=0;i<arr.length-1;i++){
-            if(arr[i]<min){
-                min=arr[i];
-            }
-        }
-        System.out.println("min"+min);
         for (int j = 0; j <arr.length; j++) {
             int i = 0;
             while (i < arr.length) {

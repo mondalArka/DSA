@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class PrimeNoForrange {
-    public static void main(String[] args)throws IOException { // Sieve atkin's process
+    public static void main(String[] args)throws IOException { // Sieve Erothenesis process complexity n*log(log n) maybe sieve atkins value is close. this is the actual sieve atkins process so n/log(log n)
             int c=0;
             int k=0;
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -15,7 +15,6 @@ public class PrimeNoForrange {
                 if(nPrime[i-1]) continue; // so that i does not repeat values like 4 6 9 10 12.....
                 for(int j=i*i;j<n;j+=i){
                     // if(nPrime[j-1]) continue; //when i is 3 starts from 9 but does not checks 12 18 indstead gives 9,15 and also redundant
-                    if(j%i==0) // if multple of i which is j is divided by i then not a prime no
                     nPrime[j-1]=true;
                     c++; // number of times the inner loop went through
                 }

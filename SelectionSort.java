@@ -1,4 +1,5 @@
-public class SelectionSort{ // is linear sort only
+public class SelectionSort{ // find the minimum and then place that minimum in i index Worst O(n^2) best O(n^2)
+    // swap complexity - n
     public static void main(String[] args){
         int[] arr = { 13,12, 5, 3, 4,16, 8, 6, 9, 7, 11,2 };
         int min;

@@ -21,7 +21,7 @@ public abstract class aniruddhaProb {
 
     public static void main(String[] args) {// pattern 0,-2,0,-2,0,-2...+2,0,+2...
         int i=0;
-        int n=7;
+        int n=5;
         int m=n;
         int r=2;
         while(i<=11){

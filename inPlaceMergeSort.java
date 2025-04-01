@@ -2,7 +2,7 @@ import java.util.Arrays;
 
 public class inPlaceMergeSort {
     public static void main(String[] args) { // complexity is nlogn and write is 
-        int[] arr={ 5,4,3,2,1,8,9};
+        int[] arr={ 5,4,3,2,1,8,9,7};
         breakArr(arr, (arr.length-1/2), 0, arr.length-1);
         System.out.println(Arrays.toString(arr));
     }
@@ -10,7 +10,7 @@ public class inPlaceMergeSort {
     static void breakArr(int[] arr,int mid,int s,int e){
         System.out.println(Arrays.toString(arr));
         if(s==e) return;
-        mid=(s+e)/2;
+        mid=s+(e-s)/2;
          breakArr(arr,mid,s,mid);
          breakArr(arr,mid, mid+1, e);
 

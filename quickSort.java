@@ -2,54 +2,48 @@ import java.util.Arrays;
 
 public class quickSort {
     public static void main(String[] args) {
-        int[] arr = { 5, 4, 3, 2, 1 };
-        breakArr(arr, arr.length);
+        int[] arr = { 0, 10, 9, 11, 142, 100, -1, 5, 4, 3, 2, 1, 8, 99, 7, 6 };
+        sort(arr, 0, arr.length - 1);
         System.out.println(Arrays.toString(arr));
     }
 
-    static void breakArr(int[] arr, int mid) {
-        int newMid = mid / 2;
-        // System.out.println("yyyyyy " + newMid);
-        if (mid == 0)
-            return;
-        breakArr(arr, newMid);
-        merge(arr, newMid);
-        breakArr(arr, newMid);
-        // System.out.println("Array: " + Arrays.toString(arr));
+    static int[] sort(int[] arr, int low, int high) {
+        int s=low;
+        int e=high;
+        if(s>=e)  return arr;
+        int pivot = s + (e - s) / 2;
+        System.out.println(pivot+" pivot");
+        while (s <= e) {
+            while (arr[s] < arr[pivot]) {
+                s++;
+                System.out.println("s "+s);
+            }
+            while (arr[e] > arr[pivot]) {
+                e--;
+                System.out.println("e "+e);
+            }
 
-    }
-
-    static void merge(int[] arr, int mid) {
-        System.out.println("xxxxx " + mid + " val "+arr[mid]);
-        // System.out.println(Arrays.toString(arr) + " inside merge");
-        int i = 0;
-        int j = mid + 1;
-        int k = 0;
-        while (i <= mid) {
-            if (arr[i] <= arr[mid])
-                i++;
-            else {
-                int temp = arr[mid];
-                arr[mid] = arr[i];
-                arr[i] = temp;
-                i++;
+            if (s < pivot) {
+                System.out.println(s+" "+e+" final");
+                int temp = arr[s];
+                arr[s] = arr[e];
+                arr[e] = temp;
+                s++;
+                System.out.println("Arr "+ Arrays.toString(arr)+"inside left");
+            }
+            if(e>pivot){
+                System.out.println(s+" "+e+" final");
+                int temp = arr[e];
+                arr[e] = arr[pivot];
+                arr[pivot] = temp;
+                e--;
+                System.out.println("Arr "+ Arrays.toString(arr)+"inside right");
             }
         }
-
-        while (j < arr.length) {
-            // System.out.println("j "+j+ " mid "+mid);
-            if (arr[mid] <= arr[j])
-                j++;
-            else {
-                // System.out.println("yyyyyy");
-                int temp = arr[mid];
-                arr[mid] = arr[j];
-                arr[j] = temp;
-                j++;
-            }
-        }
-        System.out.println(Arrays.toString(arr)+" after sort");
-        return;
+        
+        sort(arr, low, e);
+        sort(arr,e, high);
+        return arr;
     }
 
 }

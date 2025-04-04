@@ -10,7 +10,7 @@ public class inPlaceMergeSort {
     static void breakArr(int[] arr,int mid,int s,int e){
         // System.out.println(Arrays.toString(arr));
         if(s==e) return;
-        mid=(s+e)/2;
+        mid=s+(e-s)/2;
          breakArr(arr,mid,s,mid);
          breakArr(arr,mid, mid+1, e);
 

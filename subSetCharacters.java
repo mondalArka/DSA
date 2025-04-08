@@ -7,7 +7,7 @@ public class subSetCharacters {
 
     static int k = 0;
     static int chars = 0;
-    static String[] arr = new String[(int) (Math.pow(2, 4)-1)];
+    static String[] arr = new String[(int) (Math.pow(2, 3)-1)];
 
     public static void main(String[] args) throws IOException { // inplace subset
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

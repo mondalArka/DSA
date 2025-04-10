@@ -16,7 +16,7 @@ public class subSetCharacters {
         System.out.println("Subsets " + Arrays.toString(arr));
     }
 
-    static void subSets(String pick, String actualStr,int s) {
+    static void subSets(String pick, String actualStr,int s) { // 2^n*n
         // System.out.println("Actual str "+actualStr+" picked "+pick+" k "+k);
         if (s > actualStr.length()-1 ) {
             if(pick!=""){

@@ -1,14 +1,16 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class multipleRepeatedNum {
     public static void main(String[] args) {
-        int[] arr = { 2,  3, 5, 1,4,2 };
-
+        int[] arr = { 2, 3, 5, 1, 4, 9, 10 };
+        List<Integer> noMiss = new ArrayList<>();
         for (int i = 0; i < arr.length; i++) {
             int j = 0;
             while (j < arr.length) {
                 int correctIndex = arr[j] - 1;
-                if (j !=j+1  && arr[j]<arr.length)
+                if (j != j + 1 && arr[j] < arr.length)
                     swap(arr, j, correctIndex);
 
                 j++;
@@ -21,8 +23,15 @@ public class multipleRepeatedNum {
 
         int[] numArr = new int[arr.length];
         for (int i = 0; i < arr.length; i++) {
-            if (i != arr[i] - 1)
-                numArr[i] = arr[i];
+            if (i != arr[i] - 1) {
+                if (arr[i] > arr.length - 1) {
+                    if (noMiss.contains(arr[i]))
+                        numArr[i] = arr[i];
+                    else
+                        noMiss.add(arr[i]);
+                } else
+                    numArr[i] = arr[i];
+            }
 
         }
         System.out.println("Values which are repeating: ");

@@ -68,11 +68,9 @@ public class backTrackCount {
             System.out.println(p);
             return;
         }
-        if (r >= l - 1) {
-            printDirection(l, p + "R", r, c + 1);
+        if (r >= l) {
             return;
-        } else if (c >= l - 1) {
-            printDirection(l, p + "D", r + 1, c);
+        } else if (c >= l) {
             return;
         }
         printDirection(l, p + "D", r + 1, c); // for downside

@@ -20,7 +20,15 @@ public class backTrackCount {
         // -----------------------------------------------------------
 
         // print Directions
-        printDirection(arr.length, "", 0, 0);
+        // printDirection(arr.length, "", 0, 0);
+
+        // --------------------------Diagonal------------
+        // System.out.println("includee diagonal "+diagonalCount(arr.length, 0, 0, 0));
+        // printDiagonalPaths(arr.length, "", 0, 0); // print diagonal including paths
+
+        ArrayList<ArrayList<ArrayList>> arr1= diagonalList(arr.length,new ArrayList<>() , new ArrayList<>(), 0, 0);
+
+        arr1.forEach(x->System.out.println(x));
     }
 
     static int paths(int l, int cp, int r, int c) {
@@ -77,7 +85,85 @@ public class backTrackCount {
         printDirection(l, p + "R", r, c + 1); // for right
     }
 
-    static void diagonalCount(int l , int cp,int r, int c){
-        
+    static int diagonalCount(int l, int cp, int r, int c) {
+        if (r >= l - 1 && c >= l - 1) {
+            // System.out.println();
+            return cp + 1;
+        }
+
+        if (r >= l - 1) {
+            return diagonalCount(l, cp, r, c + 1);
+
+        }
+        if (c >= l - 1) {
+            return diagonalCount(l, cp, r + 1, c);
+
+        }
+        return diagonalCount(l, cp, r + 1, c) + // down side
+                diagonalCount(l, cp, r, c + 1) + // right side
+                diagonalCount(l, cp, r + 1, c + 1); // diagonal
+    }
+
+    static void printDiagonalPaths(int l, String p, int r, int c) {
+        if (r >= l - 1 && c >= l - 1) {
+            System.out.println(p);
+            return;
+        }
+
+        if (r >= l - 1) {
+            printDiagonalPaths(l, p + "R", r, c + 1);
+            return;
+        }
+        if (c >= l - 1) {
+            printDiagonalPaths(l, p + "B", r + 1, c);
+            return;
+        }
+
+        printDiagonalPaths(l, p + "B", r + 1, c); // down side
+        printDiagonalPaths(l, p + "R", r, c + 1); // right side
+        printDiagonalPaths(l, p + "D", r + 1, c + 1); // diagonal
+    }
+
+    static ArrayList<ArrayList<ArrayList>> diagonalList(int l,ArrayList<ArrayList<ArrayList>> arr, ArrayList<ArrayList> newArr,int r,int c){
+        if(r>=l-1 && c>=l-1){
+            ArrayList<Integer> inner= new ArrayList<>();
+            inner.add(r);
+            inner.add(c);
+            newArr.add(new ArrayList<>(inner));
+            arr.add(new ArrayList<>(newArr));
+            newArr.removeLast();
+            return arr;
+        }
+
+
+        if(r>=l-1){
+            ArrayList<Integer> inner= new ArrayList<>();
+            inner.add(r);
+            inner.add(c);
+            newArr.add(new ArrayList<>(inner));
+            diagonalList(l, arr, newArr, r, c+1);
+            newArr.removeLast();
+            return arr;
+        }
+
+        if(c>=l-1){
+            ArrayList<Integer> inner= new ArrayList<>();
+            inner.add(r);
+            inner.add(c);
+            newArr.add(new ArrayList<>(inner));
+            diagonalList(l, arr, newArr, r+1, c);
+            newArr.removeLast();
+            return arr;
+        }
+
+        ArrayList<Integer> inner= new ArrayList<>();
+        inner.add(r);
+        inner.add(c);
+        newArr.add(new ArrayList<>(inner));
+        diagonalList(l, arr, newArr, r+1, c); // down side
+        diagonalList(l, arr, newArr, r, c+1); // right side 
+        diagonalList(l, arr, newArr, r+1, c+1); // diagonal side
+        newArr.removeLast();
+        return arr;
     }
 }

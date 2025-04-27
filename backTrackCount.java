@@ -26,9 +26,16 @@ public class backTrackCount {
         // System.out.println("includee diagonal "+diagonalCount(arr.length, 0, 0, 0));
         // printDiagonalPaths(arr.length, "", 0, 0); // print diagonal including paths
 
-        ArrayList<ArrayList<ArrayList>> arr1= diagonalList(arr.length,new ArrayList<>() , new ArrayList<>(), 0, 0);
+        // ArrayList<ArrayList<ArrayList>> arr1 = diagonalList(arr.length, new ArrayList<>(), new ArrayList<>(), 0, 0);
 
-        arr1.forEach(x->System.out.println(x));
+        // arr1.forEach(x -> System.out.println(x));
+
+        // -----------obstacle------------
+        boolean[][] mazePath= {{true,true,true},{true,true,true},{true,true,true}};
+        // printPathsObstacle(mazePath, "", 0, 0);
+        // ------------ up left right down ---------
+        allDirections(mazePath,"",0,0);
+
     }
 
     static int paths(int l, int cp, int r, int c) {
@@ -124,9 +131,10 @@ public class backTrackCount {
         printDiagonalPaths(l, p + "D", r + 1, c + 1); // diagonal
     }
 
-    static ArrayList<ArrayList<ArrayList>> diagonalList(int l,ArrayList<ArrayList<ArrayList>> arr, ArrayList<ArrayList> newArr,int r,int c){
-        if(r>=l-1 && c>=l-1){
-            ArrayList<Integer> inner= new ArrayList<>();
+    static ArrayList<ArrayList<ArrayList>> diagonalList(int l, ArrayList<ArrayList<ArrayList>> arr,
+            ArrayList<ArrayList> newArr, int r, int c) {
+        if (r >= l - 1 && c >= l - 1) {
+            ArrayList<Integer> inner = new ArrayList<>();
             inner.add(r);
             inner.add(c);
             newArr.add(new ArrayList<>(inner));
@@ -135,35 +143,77 @@ public class backTrackCount {
             return arr;
         }
 
-
-        if(r>=l-1){
-            ArrayList<Integer> inner= new ArrayList<>();
+        if (r >= l - 1) {
+            ArrayList<Integer> inner = new ArrayList<>();
             inner.add(r);
             inner.add(c);
             newArr.add(new ArrayList<>(inner));
-            diagonalList(l, arr, newArr, r, c+1);
+            diagonalList(l, arr, newArr, r, c + 1);
             newArr.removeLast();
             return arr;
         }
 
-        if(c>=l-1){
-            ArrayList<Integer> inner= new ArrayList<>();
+        if (c >= l - 1) {
+            ArrayList<Integer> inner = new ArrayList<>();
             inner.add(r);
             inner.add(c);
             newArr.add(new ArrayList<>(inner));
-            diagonalList(l, arr, newArr, r+1, c);
+            diagonalList(l, arr, newArr, r + 1, c);
             newArr.removeLast();
             return arr;
         }
 
-        ArrayList<Integer> inner= new ArrayList<>();
+        ArrayList<Integer> inner = new ArrayList<>();
         inner.add(r);
         inner.add(c);
         newArr.add(new ArrayList<>(inner));
-        diagonalList(l, arr, newArr, r+1, c); // down side
-        diagonalList(l, arr, newArr, r, c+1); // right side 
-        diagonalList(l, arr, newArr, r+1, c+1); // diagonal side
+        diagonalList(l, arr, newArr, r + 1, c); // down side
+        diagonalList(l, arr, newArr, r, c + 1); // right side
+        diagonalList(l, arr, newArr, r + 1, c + 1); // diagonal side
         newArr.removeLast();
         return arr;
+    }
+
+    static void printPathsObstacle(boolean[][] maze,String p,int r, int c){
+
+        if(r>=maze.length-1 && c>=maze[0].length-1){
+            System.out.println(p);
+            return;
+        }
+        if(!maze[r][c]) return;
+        if(r>=maze.length-1){
+            printPathsObstacle(maze, p+"R", r, c+1);
+            return;
+        }
+        if(c>=maze[0].length-1){
+            printPathsObstacle(maze, p+"D", r+1, c);
+            return;
+        }
+        printPathsObstacle(maze,p+"D",r+1, c); // down side 
+        printPathsObstacle(maze,p+"R", r, c+1); // right side
+    }
+
+    static void allDirections(boolean[][] maze,String p,int r, int c){
+
+        if(r>=maze.length-1 && c>=maze[0].length-1){
+            System.out.println(p);
+            return;
+        }
+        // if(r<=0) return;
+        // if(c<=0) return;
+        if(!maze[r][c]) return;
+        if(r>=maze.length-1){
+            allDirections(maze, p+"R", r, c+1);
+            return;
+        }
+        if(c>=maze[0].length-1){
+            allDirections(maze, p+"D", r+1, c);
+            return;
+        }
+        
+        allDirections(maze,p+"D",r+1, c); // down side 
+        allDirections(maze,p+"R", r, c+1); // right side
+        allDirections(maze, p+"U", r-1, c); // up side
+        allDirections(maze, p+"L", r, c-1); // left side
     }
 }

@@ -26,15 +26,16 @@ public class backTrackCount {
         // System.out.println("includee diagonal "+diagonalCount(arr.length, 0, 0, 0));
         // printDiagonalPaths(arr.length, "", 0, 0); // print diagonal including paths
 
-        // ArrayList<ArrayList<ArrayList>> arr1 = diagonalList(arr.length, new ArrayList<>(), new ArrayList<>(), 0, 0);
+        // ArrayList<ArrayList<ArrayList>> arr1 = diagonalList(arr.length, new
+        // ArrayList<>(), new ArrayList<>(), 0, 0);
 
         // arr1.forEach(x -> System.out.println(x));
 
         // -----------obstacle------------
-        boolean[][] mazePath= {{true,true,true},{true,true,true},{true,true,true}};
+        boolean[][] mazePath = { { true, true, true }, { true, true, true }, { true, true, true } };
         // printPathsObstacle(mazePath, "", 0, 0);
         // ------------ up left right down ---------
-        allDirections(mazePath,"",0,0);
+        allDirections(mazePath, "", 0, 0);
 
     }
 
@@ -174,46 +175,52 @@ public class backTrackCount {
         return arr;
     }
 
-    static void printPathsObstacle(boolean[][] maze,String p,int r, int c){
+    static void printPathsObstacle(boolean[][] maze, String p, int r, int c) {
 
-        if(r>=maze.length-1 && c>=maze[0].length-1){
+        if (r >= maze.length - 1 && c >= maze[0].length - 1) {
             System.out.println(p);
             return;
         }
-        if(!maze[r][c]) return;
-        if(r>=maze.length-1){
-            printPathsObstacle(maze, p+"R", r, c+1);
+        if (!maze[r][c])
+            return;
+        if (r >= maze.length - 1) {
+            printPathsObstacle(maze, p + "R", r, c + 1);
             return;
         }
-        if(c>=maze[0].length-1){
-            printPathsObstacle(maze, p+"D", r+1, c);
+        if (c >= maze[0].length - 1) {
+            printPathsObstacle(maze, p + "D", r + 1, c);
             return;
         }
-        printPathsObstacle(maze,p+"D",r+1, c); // down side 
-        printPathsObstacle(maze,p+"R", r, c+1); // right side
+        printPathsObstacle(maze, p + "D", r + 1, c); // down side
+        printPathsObstacle(maze, p + "R", r, c + 1); // right side
     }
 
-    static void allDirections(boolean[][] maze,String p,int r, int c){
+    static void allDirections(boolean[][] maze, String p, int r, int c) {
 
-        if(r>=maze.length-1 && c>=maze[0].length-1){
+        if (r < 0 || c < 0 || !maze[r][c])
+            return;
+
+        if (r >= maze.length - 1 && c >= maze[0].length - 1) {
             System.out.println(p);
             return;
         }
         // if(r<=0) return;
         // if(c<=0) return;
-        if(!maze[r][c]) return;
-        if(r>=maze.length-1){
-            allDirections(maze, p+"R", r, c+1);
+
+        if (r >= maze.length - 1) {
+            allDirections(maze, p + "R", r, c + 1);
             return;
         }
-        if(c>=maze[0].length-1){
-            allDirections(maze, p+"D", r+1, c);
+        if (c >= maze[0].length - 1) {
+            allDirections(maze, p + "D", r + 1, c);
             return;
         }
-        
-        allDirections(maze,p+"D",r+1, c); // down side 
-        allDirections(maze,p+"R", r, c+1); // right side
-        allDirections(maze, p+"U", r-1, c); // up side
-        allDirections(maze, p+"L", r, c-1); // left side
+
+        maze[r][c] = false; // so that it will not move on the same path backwards
+        allDirections(maze, p + "D", r + 1, c); // down side
+        allDirections(maze, p + "R", r, c + 1); // right side
+        allDirections(maze, p + "U", r - 1, c); // up side
+        allDirections(maze, p + "L", r, c - 1); // left side
+        maze[r][c] = true; // so that when the function ends the path is restored safely
     }
 }

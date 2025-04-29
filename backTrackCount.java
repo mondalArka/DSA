@@ -1,10 +1,15 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class backTrackCount {
     static int count = 0;
 
     public static void main(String[] args) {
-        int[][] arr = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
+        int[][] arr = {
+                { 1, 4, 7 },
+                { 2, 5, 8 },
+                { 3, 6, 9 }
+        };
 
         // System.out.println(paths(arr.length, count, 0, 0) + " number of paths"); //
         // number of paths
@@ -35,7 +40,8 @@ public class backTrackCount {
         boolean[][] mazePath = { { true, true, true }, { true, true, true }, { true, true, true } };
         // printPathsObstacle(mazePath, "", 0, 0);
         // ------------ up left right down ---------
-        allDirections(mazePath, "", 0, 0);
+        // allDirections(mazePath, "", 0, 0);
+        allPrintDirections(arr, new ArrayList<>(), mazePath, "", 0, 0);
 
     }
 
@@ -202,7 +208,7 @@ public class backTrackCount {
         }
 
         if (!maze[r][c])
-        return;
+            return;
 
         if (r >= maze.length - 1 && c >= maze[0].length - 1) {
             System.out.println(p);
@@ -224,5 +230,42 @@ public class backTrackCount {
         allDirections(maze, p + "U", r - 1, c); // up side
         allDirections(maze, p + "L", r, c - 1); // left side
         maze[r][c] = true; // so that when the function ends the path is restored safely
+    }
+
+    static void allPrintDirections(int[][] mazeArr, ArrayList<Integer> arr, boolean[][] maze, String p, int r, int c) {
+        // System.out.println(r+" "+c);
+        if (r < 0 || c < 0 || r >= maze.length || c >= maze[0].length) {
+            return;
+        }
+
+        if (!maze[r][c])
+            return;
+
+        if (r >= maze.length - 1 && c >= maze[0].length - 1) {
+            arr.add(mazeArr[r][c]);
+            arr.forEach(x -> System.out.print(x + " "));
+            System.out.println(p);
+            System.out.println("------------------------------------");
+            arr.removeLast();
+            return;
+        }
+
+        if (r >= maze.length) {
+            // allDirections(maze, p + "R", r, c + 1);
+            return;
+        }
+        if (c >= maze[0].length) {
+            // allDirections(maze, p + "D", r + 1, c);
+            return;
+        }
+
+        maze[r][c] = false; // so that it will not move on the same path backwards
+        arr.add(mazeArr[r][c]);
+        allPrintDirections(mazeArr, arr, maze, p + "D", r + 1, c); // down side
+        allPrintDirections(mazeArr, arr, maze, p + "R", r, c + 1); // right side
+        allPrintDirections(mazeArr, arr, maze, p + "U", r - 1, c); // up side
+        allPrintDirections(mazeArr, arr, maze, p + "L", r, c - 1); // left side
+        maze[r][c] = true; // so that when the function ends the path is restored safely
+        arr.removeLast();
     }
 }

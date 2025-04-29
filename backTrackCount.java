@@ -204,8 +204,6 @@ public class backTrackCount {
             System.out.println(p);
             return;
         }
-        // if(r<=0) return;
-        // if(c<=0) return;
 
         if (r >= maze.length - 1) {
             allDirections(maze, p + "R", r, c + 1);

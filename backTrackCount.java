@@ -196,21 +196,25 @@ public class backTrackCount {
     }
 
     static void allDirections(boolean[][] maze, String p, int r, int c) {
-
-        if (r < 0 || c < 0 || !maze[r][c])
+        // System.out.println(r+" "+c);
+        if (r < 0 || c < 0 || r >= maze.length || c >= maze[0].length) {
             return;
+        }
+
+        if (!maze[r][c])
+        return;
 
         if (r >= maze.length - 1 && c >= maze[0].length - 1) {
             System.out.println(p);
             return;
         }
 
-        if (r >= maze.length - 1) {
-            allDirections(maze, p + "R", r, c + 1);
+        if (r >= maze.length) {
+            // allDirections(maze, p + "R", r, c + 1);
             return;
         }
-        if (c >= maze[0].length - 1) {
-            allDirections(maze, p + "D", r + 1, c);
+        if (c >= maze[0].length) {
+            // allDirections(maze, p + "D", r + 1, c);
             return;
         }
 

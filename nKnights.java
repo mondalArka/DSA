@@ -7,11 +7,11 @@ public class nKnights {
                 { 'm', 'n', 'o', 'p' },
         };
         boolean[][] maze = new boolean[4][4];
-        // arrange(maze, arr, "", 0);
-        arrange2(maze, arr, "", 0, 0, 4);
+        // arrange(maze, arr, "", 0); // row constraint
+        arrange2(maze, arr, "", 0, 0, 4); // no constraint all combos
     }
 
-    // static void arrange(boolean[][] maze, char[][] arr, String p, int r) {
+    // static void arrange(boolean[][] maze, char[][] arr, String p, int r) { //*** */ constraint is if 1 knight is placed in a row then move to next row
     // // System.out.println(r + " row");
     // if (r >= arr.length) {
     // System.out.println("Placements are " + p);
@@ -28,32 +28,27 @@ public class nKnights {
     // }
 
     static void arrange2(boolean[][] maze, char[][] arr, String p, int r, int c, int knights) {
-        // System.out.println(r + " row");
-        if (check(maze, r, c))
+        // System.out.println(r + " row "+c+" knights "+knights); // **finds al combos no constraint like 1 knight in 1 row 
+        if (r > arr.length - 1) { //*** uses subset algo pick and dont pick,and reduce knights if picked and mark it true */
             return;
-
+        }
         if (knights == 0) {
-            System.out.println("Placements are " + p);
+            // System.out.println("print it");
+            System.out.println(p);
+            return;
+        }
+        if (c >= arr[0].length) {
+            // System.out.println("next row");
+            arrange2(maze, arr, p, r + 1, 0, knights);
             return;
         }
 
-        if (c >= arr[0].length)
-            return;
-
-        maze[r][c] = !maze[r][c];
-        arrange2(maze, arr, p + arr[r][c], r, c + 1, knights - 1);
-        maze[r][c] = !maze[r][c];
-        arrange2(maze, arr, p + arr[r][c], r + 1, 0, knights - 1);
-
-        for (int i = c; i < arr[0].length; i++) {
-            maze[r][i] = !maze[r][i];
-            p += arr[r][i];
-            maze[r][i] = !maze[r][i];
-            knights--;
-            if (c == arr[0].length - 1)
-                arrange2(maze, arr, p, r + 1, c, knights);
-
+        if (!check(maze, r, c)) {
+            maze[r][c] = !maze[r][c];
+            arrange2(maze, arr, p + arr[r][c], r, c + 1, knights - 1); // for column pick the knight
+            maze[r][c] = !maze[r][c];
         }
+        arrange2(maze, arr, p, r, c + 1, knights); // for column dont pick
 
     }
 

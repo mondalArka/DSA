@@ -1,32 +1,34 @@
+import java.util.ArrayList;
 import java.util.Arrays;;
 
 public class sudokuSolver {
     public static void main(String[] args) {
 
         // int[][] board = {
-        //         { 5, 3, 4, 6, 7, 8, 9, 1, 0 },
-        //         { 6, 7, 2, 1, 9, 5, 3, 4, 8 },
-        //         { 1, 9, 8, 3, 4, 2, 5, 6, 7 },
-        //         { 8, 5, 9, 7, 6, 1, 4, 2, 3 },
-        //         { 4, 2, 6, 8, 0, 3, 7, 9, 1 }, // Empty cell at [4][4]
-        //         { 0, 1, 3, 9, 2, 4, 8, 5, 6 },
-        //         { 9, 6, 1, 5, 3, 7, 2, 8, 4 },
-        //         { 2, 8, 7, 4, 1, 9, 0, 3, 5 }, // Empty cell at [7][6]
-        //         { 3, 4, 0, 2, 8, 6, 1, 7, 9 } };
-        int[][] board = {
-        { 5, 3, 0, 0, 7, 0, 0, 0, 0 },
-        { 6, 0, 0, 1, 9, 5, 0, 0, 0 },
-        { 0, 9, 8, 0, 0, 0, 0, 6, 0 },
-        { 8, 0, 0, 0, 6, 0, 0, 0, 3 },
-        { 4, 0, 0, 8, 0, 3, 0, 0, 1 },
-        { 7, 0, 0, 0, 2, 0, 0, 0, 6 },
-        { 0, 6, 0, 0, 0, 0, 2, 8, 0 },
-        { 0, 0, 0, 4, 1, 9, 0, 0, 5 },
-        { 0, 0, 0, 0, 8, 0, 0, 7, 9 }
-        };
-
-        // { 5, 3, 4, 6, 7, 8, 9, 1, 2 }, // solved solution
+        // { 5, 3, 4, 6, 7, 8, 9, 1, 0 },
         // { 6, 7, 2, 1, 9, 5, 3, 4, 8 },
+        // { 1, 9, 8, 3, 4, 2, 5, 6, 7 },
+        // { 8, 5, 9, 7, 6, 1, 4, 2, 3 },
+        // { 4, 2, 6, 8, 0, 3, 7, 9, 1 }, // Empty cell at [4][4]
+        // { 0, 1, 3, 9, 2, 4, 8, 5, 6 },
+        // { 9, 6, 1, 5, 3, 7, 2, 8, 4 },
+        // { 2, 8, 7, 4, 1, 9, 0, 3, 5 }, // Empty cell at [7][6]
+        // { 3, 4, 0, 2, 8, 6, 1, 7, 9 } };
+        // int[][] board = {
+        // { 5, 3, 0, 0, 7, 0, 0, 0, 0 },
+        // { 6, 0, 0, 1, 9, 5, 0, 0, 0 },
+        // { 0, 9, 8, 0, 0, 0, 0, 6, 0 },
+        // { 8, 0, 0, 0, 6, 0, 0, 0, 3 },
+        // { 4, 0, 0, 8, 0, 3, 0, 0, 1 },
+        // { 7, 0, 0, 0, 2, 0, 0, 0, 6 },
+        // { 0, 6, 0, 0, 0, 0, 2, 8, 0 },
+        // { 0, 0, 0, 4, 1, 9, 0, 0, 5 },
+        // { 0, 0, 0, 0, 8, 0, 0, 7, 9 }
+        // };
+
+        // int[][] board = {
+        // { 5, 3, 4, 0, 7, 8, 9, 0, 2 }, // solved solution
+        // { 6, 7, 2, 0, 9, 5, 3, 0, 8 },
         // { 1, 9, 8, 3, 4, 2, 5, 6, 7 },
         // { 8, 5, 9, 7, 6, 1, 4, 2, 3 },
         // { 4, 2, 6, 8, 5, 3, 7, 9, 1 },
@@ -34,6 +36,44 @@ public class sudokuSolver {
         // { 9, 6, 1, 5, 3, 7, 2, 8, 4 },
         // { 2, 8, 7, 4, 1, 9, 6, 3, 5 },
         // { 3, 4, 5, 2, 8, 6, 1, 7, 9 }
+        // };
+
+        // int[][] board = {
+        // { 0, 0, 0, 2, 6, 0, 7, 0, 1 }, // to solve
+        // { 6, 8, 0, 0, 7, 0, 0, 9, 0 },
+        // { 1, 9, 0, 0, 0, 4, 5, 0, 0 },
+        // { 8, 2, 0, 1, 0, 0, 0, 4, 0 },
+        // { 0, 0, 4, 6, 0, 2, 9, 0, 0 },
+        // { 0, 5, 0, 0, 0, 3, 0, 2, 8 },
+        // { 0, 0, 9, 3, 0, 0, 0, 7, 4 },
+        // { 0, 4, 0, 0, 5, 0, 0, 3, 6 },
+        // { 7, 0, 3, 0, 1, 8, 0, 0, 0 }
+        // };
+
+        // int[][] board = {
+        //         { 5, 3, 0, 0, 7, 8, 9, 1, 0 }, // use brute and singles
+        //         { 6, 7, 2, 1, 9, 5, 3, 4, 8 },
+        //         { 1, 9, 8, 3, 4, 2, 5, 6, 7 },
+        //         { 8, 5, 9, 7, 6, 1, 4, 2, 3 },
+        //         { 4, 2, 6, 8, 0, 3, 7, 9, 1 },
+        //         { 7, 1, 3, 9, 2, 4, 8, 5, 6 },
+        //         { 9, 6, 1, 5, 3, 7, 2, 8, 4 },
+        //         { 2, 8, 7, 4, 1, 9, 6, 3, 5 },
+        //         { 3, 4, 0, 2, 8, 6, 1, 7, 0 }
+        // };
+
+        int[][] board = {
+            { 0, 0, 0, 0, 0, 0, 0, 1, 2 }, // hardest uses singles hidden Xs and swords
+            { 0, 0, 0, 0, 3, 5, 0, 0, 0 },
+            { 0, 0, 0, 6, 0, 0, 0, 7, 0 },
+            { 0, 0, 0, 0, 0, 0, 0, 0, 8 },
+            { 0, 0, 0, 0, 7, 0, 0, 0, 0 },
+            { 9, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 8, 0, 0, 0, 4, 0, 0, 0 },
+            { 0, 0, 0, 2, 0, 0, 0, 0, 0 },
+            { 1, 7, 0, 0, 0, 0, 0, 0, 0 }
+        };
+
         // long start = System.nanoTime();
         // int[] result = isSolved(board);
         // long end = System.nanoTime();
@@ -43,28 +83,56 @@ public class sudokuSolver {
         // System.out.println("is valid " + isValid(board, 1, 2, 6));
 
         solver(board, 0, 0);
+        // ArrayList<ArrayList<Integer>> emptyCell =
+        // sudokuSolverLogics.emptyCell(board);
+        // emptyCell.forEach(x->System.out.println(x));
+
+        System.out.println(formatAsJavaArray(board) + " final");
     }
 
     static boolean solver(int[][] board, int r, int c) {
+        System.out.println(formatAsJavaArray(board) + " each");
         int[] unsolvedPos = isSolved(board);
         r = unsolvedPos[0]; // find unsolved pos
         c = unsolvedPos[1];
+        System.out.println(r + " " + c+" unsolved");
         if (r == -1 && c == -1) { // if solved, print it
-            System.out.println("Solved" +formatAsJavaArray(board)); // if found instantly print it, can also be printed in main function
+            System.out.println("Solved" + formatAsJavaArray(board)); // if found instantly print it, can also be printed
+                                                                     // in main function
             return true;
         }
-
+        // naked single method
+        ArrayList<ArrayList<Integer>> filled = sudokuSolverLogics.nakedSingle(board);
+        filled.forEach(x -> {
+            System.out.println(x + " filled");
+        });
         // not solved case
-        for (int i = 1; i <= board.length; i++) {
-            if (isValid(board, i, r, c)) {
-                board[r][c] = i; // place the value if placeble
-                boolean status = solver(board, r, c); // call for the next unsolved pos
-                if (status) { // if true means solution have been found end the loop process and return
-                    return status;
+        int[] bruteUnsolvedPos = isSolved(board);
+        // System.out.println(Arrays.toString(bruteUnsolvedPos)+" poss");
+        if (bruteUnsolvedPos[0] == -1 && bruteUnsolvedPos[1] == -1) 
+            return true;
+        
+            r = bruteUnsolvedPos[0]; // find unsolved pos for brute force
+            c = bruteUnsolvedPos[1]; // find unsolved pos for brute force
+            System.out.println("brute solve " + r + " " + c);
+            for (int i = 1; i <= board.length; i++) {
+                if (isValid(board, i, r, c)) {
+                    board[r][c] = i; // place the value if placeble
+                    System.out.println(formatAsJavaArray(board) + " after");
+                    boolean status = solver(board, r, c); // call for the next unsolved pos
+                    if (status) { // if true means solution have been found end the loop process and return
+                        return status;
+                    }
+                    board[r][c] = 0;
                 }
-                board[r][c] = 0;
             }
-        }
+
+            filled.forEach(x -> {
+                System.out.println(x.get(0) + " " + x.get(1)); // back track for naked singles
+                board[x.get(0)][x.get(1)] = 0;
+            });
+
+
         return false;
     }
 
@@ -215,10 +283,12 @@ public class sudokuSolver {
             sb.append("    { ");
             for (int j = 0; j < board[i].length; j++) {
                 sb.append(board[i][j]);
-                if (j < board[i].length - 1) sb.append(", ");
+                if (j < board[i].length - 1)
+                    sb.append(", ");
             }
             sb.append(" }");
-            if (i < board.length - 1) sb.append(",");
+            if (i < board.length - 1)
+                sb.append(",");
             sb.append("\n");
         }
         sb.append("};");

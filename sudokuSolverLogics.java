@@ -69,20 +69,16 @@ public class sudokuSolverLogics {
         int rs = 0;
         int re = board.length - 1;
         while (rs <= re) {
-            int[] unsolvedPos = sudokuSolver.isSolved(board);
-
-            if (unsolvedPos[0] != -1 || unsolvedPos[1] != -1) {
+            
                 nakedSingleInnerRow(board, rs);
                 nakedSingleColumn(board, rs);
-            } else
-                break;
+           
             if (rs == re)
                 break;
-            if (unsolvedPos[0] != -1 || unsolvedPos[1] != -1) {
+           
                 nakedSingleInnerRow(board, re);
                 nakedSingleColumn(board, re);
-            } else
-                break;
+          
             rs++;
             re--;
 
@@ -127,7 +123,6 @@ public class sudokuSolverLogics {
             board[newArr.get(0).get(0)][newArr.get(0).get(1)] = missing;
             filled.add(new ArrayList<>(newArr.get(0)));
             nakedSingleColumn(board, newArr.get(0).get(1));
-            return;
         }
     }
 
@@ -169,7 +164,7 @@ public class sudokuSolverLogics {
             board[newArr.get(0).get(0)][newArr.get(0).get(1)] = missing;
             filled.add(new ArrayList<>(newArr.get(0)));
             nakedSingleInnerRow(board, newArr.get(0).get(0));
-            return;
+            
         }
     }
 }

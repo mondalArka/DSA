@@ -74,6 +74,15 @@ public class sudokuSolver {
             { 1, 7, 0, 0, 0, 0, 0, 0, 0 }
         };
 
+        // int[][] board = {
+        //     { 5, 0 ,4, 6, 2, 0 }, // [0][5] = 1 (Row 0 naked single, after [2][5])
+        //     { 6, 2, 1, 0, 4, 3 },
+        //     { 1, 4, 3, 2, 6, 0 }, // [2][5] = 5 (Row 2 naked single)
+        //     { 2, 0, 5, 3, 1, 4 },
+        //     { 4, 5, 2, 0, 3, 6 },
+        //     { 3, 1, 6, 4, 5, 2 }
+        // };
+
         // long start = System.nanoTime();
         // int[] result = isSolved(board);
         // long end = System.nanoTime();
@@ -91,11 +100,12 @@ public class sudokuSolver {
     }
 
     static boolean solver(int[][] board, int r, int c) {
-        System.out.println(formatAsJavaArray(board) + " each");
+        // System.out.println(formatAsJavaArray(board) + " each");
+        System.out.println("in recursion");
         int[] unsolvedPos = isSolved(board);
         r = unsolvedPos[0]; // find unsolved pos
         c = unsolvedPos[1];
-        System.out.println(r + " " + c+" unsolved");
+        // System.out.println(r + " " + c+" unsolved");
         if (r == -1 && c == -1) { // if solved, print it
             System.out.println("Solved" + formatAsJavaArray(board)); // if found instantly print it, can also be printed
                                                                      // in main function
@@ -103,9 +113,10 @@ public class sudokuSolver {
         }
         // naked single method
         ArrayList<ArrayList<Integer>> filled = sudokuSolverLogics.nakedSingle(board);
-        filled.forEach(x -> {
-            System.out.println(x + " filled");
-        });
+        // filled.forEach(x -> {
+        //     System.out.println(x + " filled");
+        // });
+        System.out.println(formatAsJavaArray(board) + " after naked op");
         // not solved case
         int[] bruteUnsolvedPos = isSolved(board);
         // System.out.println(Arrays.toString(bruteUnsolvedPos)+" poss");
@@ -118,19 +129,23 @@ public class sudokuSolver {
             for (int i = 1; i <= board.length; i++) {
                 if (isValid(board, i, r, c)) {
                     board[r][c] = i; // place the value if placeble
-                    System.out.println(formatAsJavaArray(board) + " after");
+                    System.out.println("solve with "+i);
+                    System.out.println(formatAsJavaArray(board) + " after brute valid");
                     boolean status = solver(board, r, c); // call for the next unsolved pos
                     if (status) { // if true means solution have been found end the loop process and return
                         return status;
                     }
                     board[r][c] = 0;
+                    System.out.println(formatAsJavaArray(board) + " after brute failed");
                 }
             }
-
+            filled.forEach(x->System.out.println(x+ " filled"));
             filled.forEach(x -> {
                 System.out.println(x.get(0) + " " + x.get(1)); // back track for naked singles
                 board[x.get(0)][x.get(1)] = 0;
             });
+
+            System.out.println(formatAsJavaArray(board) + " after back track naked");
 
 
         return false;

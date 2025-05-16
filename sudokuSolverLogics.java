@@ -65,7 +65,7 @@ public class sudokuSolverLogics {
     // ******************Row & column naked singles*****************
     static ArrayList<ArrayList<Integer>> nakedSingle(int[][] board) {
         filled.clear();
-        System.out.println("naked single");
+        // System.out.println("naked single");
         int rs = 0;
         int re = board.length - 1;
         while (rs <= re) {

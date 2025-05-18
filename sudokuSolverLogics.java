@@ -91,6 +91,9 @@ public class sudokuSolverLogics {
     }
 
     static void nakedSingleInnerRow(int[][] board, int r) {
+        boolean notFilled = filled.stream().anyMatch(x -> x.getFirst() == -2 && x.getLast() == -2);
+        if (notFilled)
+            return;
         ArrayList<Integer> arr = new ArrayList<Integer>();
         ArrayList<ArrayList<Integer>> newArr = new ArrayList<ArrayList<Integer>>();
         int s = 0;
@@ -120,18 +123,32 @@ public class sudokuSolverLogics {
             e--;
         }
 
-        if (newArr.size() == 1
-                && sudokuSolver.isValid(board, (45 - count), newArr.get(0).get(0), newArr.get(0).get(1))) {
-            int missing = 45 - count;
-            // System.out.println(missing + " missing");
-            board[newArr.get(0).get(0)][newArr.get(0).get(1)] = missing;
+        if (newArr.size() == 1) {
             filled.add(new ArrayList<>(newArr.get(0)));
-            nakedSingleColumn(board, newArr.get(0).get(1));
-            return;
+            if (sudokuSolver.isValid(board, (45 - count), newArr.get(0).get(0), newArr.get(0).get(1))) {
+                int missing = 45 - count;
+                System.out.println((newArr.size() == 1
+                        && sudokuSolver.isValid(board, (45 - count), newArr.get(0).get(0), newArr.get(0).get(1)))
+                        + " check Valid");
+                System.out.println(missing + " missing row");
+                System.out.println("placed at " + newArr.get(0).get(0) + " " + newArr.get(0).get(1));
+                board[newArr.get(0).get(0)][newArr.get(0).get(1)] = missing;
+                nakedSingleColumn(board, newArr.get(0).get(1));
+                return;
+            } else {
+                System.out.println("row else"+newArr.getFirst());
+                ArrayList<Integer> x = new ArrayList<>();
+                x.add(-2);
+                x.add(-2);
+                filled.add(new ArrayList<>(x));
+            }
         }
     }
 
     static void nakedSingleColumn(int[][] board, int c) {
+        boolean notFilled = filled.stream().anyMatch(x -> x.getFirst() == -2 && x.getLast() == -2);
+        if (notFilled)
+            return;
         int rS = 0;
         int rE = board.length - 1;
         int count = 0;
@@ -162,14 +179,22 @@ public class sudokuSolverLogics {
             rE--;
 
         }
-        if (newArr.size() == 1
-                && sudokuSolver.isValid(board, (45 - count), newArr.get(0).get(0), newArr.get(0).get(1))) {
-            int missing = 45 - count;
-            // System.out.println(missing + " missing");
-            board[newArr.get(0).get(0)][newArr.get(0).get(1)] = missing;
+        if (newArr.size() == 1) {
             filled.add(new ArrayList<>(newArr.get(0)));
-            nakedSingleInnerRow(board, newArr.get(0).get(0));
-            return;
+            if (sudokuSolver.isValid(board, (45 - count), newArr.get(0).get(0), newArr.get(0).get(1))) {
+                int missing = 45 - count;
+                System.out.println(missing + " missing column");
+                System.out.println("placed at " + newArr.get(0).get(0) + " " + newArr.get(0).get(1));
+                board[newArr.get(0).get(0)][newArr.get(0).get(1)] = missing;
+                nakedSingleInnerRow(board, newArr.get(0).get(0));
+                return;
+            } else {
+                System.out.println("col else"+newArr.getFirst());
+                ArrayList<Integer> x = new ArrayList<>();
+                x.add(-2);
+                x.add(-2);
+                filled.add(new ArrayList<>(x));
+            }
         }
     }
 }

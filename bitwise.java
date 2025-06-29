@@ -24,7 +24,7 @@ public class bitwise {
         // bitSettingOnOff(15, 4);
         // bitToggle(10, 1);
         // findSetBit(12); // find the right most on bit
-        // findAllUnique(arr2); // constraint is numbers shpould repeat twice and 2 nos
+        // findAllUnique(arr2); // constraint is numbers shpould repeat twice and 2  unique nos
         // should only be unique
         // findUniqueSigned(arr3);
         // findUniqueTriples(arr4);
@@ -104,7 +104,7 @@ public class bitwise {
         x += 1;
         System.out.println("add" + String.format(Integer.toBinaryString(x)));
         int y = n & x;
-        System.out.println("pos if right 1 bit " + (Integer.numberOfTrailingZeros(y) + 1));
+        System.out.println("pos of right 1 bit " + (Integer.numberOfTrailingZeros(y) + 1));
     }
 
     static void findAllUnique(int[] arr) {

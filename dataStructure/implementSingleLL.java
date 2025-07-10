@@ -2,12 +2,28 @@ package dataStructure;
 
 public class implementSingleLL {
     public static void main(String[] args) {
-        // SingleLinkedList list = new SingleLinkedList();
+        SingleLinkedList list = new SingleLinkedList();
+        SingleLinkedList list1 = new SingleLinkedList();
         // list.addFirst(10);
         // list.addFirst(20);
         // list.addFirst(30);
-        // list.addFirst(40);
-        // list.addLast(60);
+        // list.addFirst(30);
+        // list.addLast(40);
+        // list.addLast(40);
+        // list.addFirst(60);
+        // list.addFirst(60);
+        list.addLast(1);
+        list.addLast(3);
+        // list.addLast(5);
+        list1.addLast(1);
+        list1.addLast(2);
+
+        list1.addLast(9);
+        list1.addLast(14);
+        list.display();
+        list1.display();
+        SingleLinkedList newList = list.merge(list.head, list1.head);
+        newList.display();
         // list.insertAfterIndex(13, 0);
         // list.insertBeforeIndex(4, 1);
         // list.display();
@@ -19,7 +35,9 @@ public class implementSingleLL {
         // list.display();
         // System.out.println("Size is " + list.getSize());
         // System.out.println("Next node is " + list.getNextNode(30)); // node not exists
-
+        // list.insert(3, 5);
+        // list.distinct();
+        // list.display();
         // DoublyLinkedList dl = new DoublyLinkedList();
 
         // dl.addFirst(5);
@@ -46,23 +64,23 @@ public class implementSingleLL {
         // System.out.println("Size is " + dl.getSize());
         // System.out.println("Get prev node "+ dl.getPrevNode(0));
 
-        CircularLinkedList cl = new CircularLinkedList();
-        cl.addFirst(5);
-        cl.addFirst(4);
-        cl.addFirst(3);
-        cl.addFirst(2);
-        cl.addFirst(1);
-        cl.addLast(7);
-        cl.display();
-        cl.deleteFirst();
-        cl.display();
-        cl.deleteLast();
-        cl.display();
-        cl.deleteLast();
-        cl.display();
-        cl.insertAfterIndex(12,2);
-        cl.insertAfterIndex(14,1);
-        cl.insertBeforeIndex(11, 1);
-        cl.display();
+        // CircularLinkedList cl = new CircularLinkedList();
+        // cl.addFirst(5);
+        // cl.addFirst(4);
+        // cl.addFirst(3);
+        // cl.addFirst(2);
+        // cl.addFirst(1);
+        // cl.addLast(7);
+        // cl.display();
+        // cl.deleteFirst();
+        // cl.display();
+        // cl.deleteLast();
+        // cl.display();
+        // cl.deleteLast();
+        // cl.display();
+        // cl.insertAfterIndex(12,2);
+        // cl.insertAfterIndex(14,1);
+        // cl.insertBeforeIndex(11, 1);
+        // cl.display();
     }
 }

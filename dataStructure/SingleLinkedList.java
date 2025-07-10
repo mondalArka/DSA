@@ -1,8 +1,8 @@
 package dataStructure;
 
 public class SingleLinkedList {
-    private Node head; // head will point to an instance of a Node so type is node
-    private Node tail; // tail will point to an instance of a Node so type is node
+    public Node head; // head will point to an instance of a Node so type is node
+    public Node tail; // tail will point to an instance of a Node so type is node
     private int size; // increment the size when something is added or may be removed
 
     SingleLinkedList() {
@@ -29,7 +29,7 @@ public class SingleLinkedList {
             tail = node;
         } else { // means no element present
             head = node; // make the new node the head
-            tail = node; // make the new node the tail
+            tail = head; // make the new node the tail
         }
         size++;
     }
@@ -70,7 +70,7 @@ public class SingleLinkedList {
     }
 
     public void insertBeforeIndex(int value, int index) {
-        if (index <= 0 || index > (size - 1)) // index 0 inser6tion is not allowed cause 
+        if (index <= 0 || index > (size - 1)) // index 0 inser6tion is not allowed cause
             throw new Error("Invalid index");
         Node temp = head;
         int i = 0;
@@ -154,6 +154,77 @@ public class SingleLinkedList {
         return size;
     }
 
+    // *****---------questions-------******
+    public void insert(int value, int index) { // google question
+        if (index < 0)
+            throw new Error("Invalid index");
+        head = insertRecusrion(value, index, head);
+    }
+
+    private Node insertRecusrion(int value, int index, Node nextTemp) {
+        if (index == 0) {
+            Node node = new Node(value, nextTemp);
+            size++;
+            return node;
+        }
+        nextTemp.next = insertRecusrion(value, index - 1, nextTemp.next);
+        return nextTemp;
+    }
+
+    public void distinct() {
+        Node temp = head;
+        deleteDuplicates(temp);
+        System.out.println(
+                head.value + " next head " + head.next.value + " tail " + tail.value + " next tail " + tail.next);
+    }
+
+    public void deleteDuplicates(Node temp) { // leet code
+        if (temp == null || temp.next == null)
+            return;
+
+        if (temp.value == temp.next.value) {
+            temp.next = temp.next.next;
+            deleteDuplicates(temp);
+            size--;
+            return;
+        }
+        deleteDuplicates(temp.next);
+    }
+
+    public SingleLinkedList merge(Node head1, Node head2) {
+        SingleLinkedList list = new SingleLinkedList();
+        list.head = mergeList(head1, head2);
+        return list;
+    }
+
+    public Node mergeList(Node temp1, Node temp2) {
+        if (temp1 == null && temp2 == null)
+            return null;
+        if (temp1 == null) {
+            Node node = new Node(temp2.value);
+            node.next = mergeList(temp1, temp2.next);
+            tail = node;
+            return node;
+        }
+        if (temp2 == null) {
+            Node node = new Node(temp1.value);
+            node.next = mergeList(temp1.next, temp2);
+            tail = node;
+            return node;
+        }
+
+        if (temp1.value < temp2.value) {
+            Node node = new Node(temp1.value);
+            node.next = mergeList(temp1.next, temp2);
+            return node;
+        } else {
+            Node node = new Node(temp2.value);
+            node.next = mergeList(temp1, temp2.next);
+            return node;
+        }
+    }
+
+    // *****------------***********
     public void display() {
         Node temp = head;
         while (temp != null) {
@@ -170,6 +241,11 @@ public class SingleLinkedList {
         public Node(int value) {
             this.value = value;
             this.next = null;
+        }
+
+        public Node(int value, Node next) {
+            this.value = value;
+            this.next = next;
         }
     }
 }

@@ -22,7 +22,7 @@ public class implementSingleLL {
         list1.addLast(14);
         list.display();
         list1.display();
-        SingleLinkedList newList = list.merge(list.head, list1.head);
+        SingleLinkedList newList = list.merge(list.head, list1.head); // to work this make public head in singleLL class otherwise cant access it
         newList.display();
         // list.insertAfterIndex(13, 0);
         // list.insertBeforeIndex(4, 1);

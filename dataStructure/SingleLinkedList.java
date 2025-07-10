@@ -1,8 +1,8 @@
 package dataStructure;
 
 public class SingleLinkedList {
-    public Node head; // head will point to an instance of a Node so type is node
-    public Node tail; // tail will point to an instance of a Node so type is node
+    private Node head; // head will point to an instance of a Node so type is node
+    private Node tail; // tail will point to an instance of a Node so type is node
     private int size; // increment the size when something is added or may be removed
 
     SingleLinkedList() {
@@ -197,7 +197,7 @@ public class SingleLinkedList {
         return list;
     }
 
-    public Node mergeList(Node temp1, Node temp2) {
+    private Node mergeList(Node temp1, Node temp2) {
         if (temp1 == null && temp2 == null)
             return null;
         if (temp1 == null) {

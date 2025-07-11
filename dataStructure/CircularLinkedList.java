@@ -1,7 +1,7 @@
 package dataStructure;
 
 public class CircularLinkedList {
-    private Node head; // head will point to an instance of a Node so type is node
+    public Node head; // head will point to an instance of a Node so type is node
     private Node tail; // tail will point to an instance of a Node so type is node
     private int size; // increment the size when something is added or may be removed
 
@@ -180,6 +180,69 @@ public class CircularLinkedList {
         }
         System.out.println();
     }
+
+    // *****------------***********
+    public boolean isInCycle(Node head) { // *****VIMP check whether cycle exists or not.Complexity O(n). fast slow
+                                          // pointer method.Concept to just check whether f and s are same or not if
+                                          // same then cycle
+        Node f = head;
+        Node s = head;
+        boolean flag = false;
+        int count = 1;
+        while (f != null && f.next != null) {
+            System.out.println(count + " counter");
+            f = f.next.next;
+            s = s.next;
+            if (f == s)
+                return !flag;
+            count++;
+        }
+        return flag;
+    }
+
+    public int lengthOfCycle(Node head) { // length of cycle check cycle exists and then move s forward by 1 unitl it
+                                          // reaches f after traveling nodes so print the count of that nodes
+        Node f = head;
+        Node s = head;
+        int count = 1;
+        int len = 0;
+        while (f != null && f.next != null) {
+            System.out.println(count + " counter");
+            f = f.next.next;
+            s = s.next;
+            if (f == s)
+                break;
+            count++;
+        }
+
+        do { // finding the length of the cycle
+            s = s.next;
+            len++;
+        } while (f != s);
+
+        return len;
+    }
+
+    public int getIndexofStartCycle(Node head) {
+        Node f = head;
+        Node s = head;
+        while (f != null && f.next != null) { // detect whether cycle is present or not
+            f = f.next.next;
+            s = s.next;
+            if (f == s)
+                break;
+        }
+        Node temp = head;
+        int index = 0;
+        while (temp != s) {
+            temp = temp.next;
+            s = s.next;
+            index++;
+        }
+        return index; // flyods method to get the start of the cycle.Concept make the temp point to head and start incrementing by 1 and same for s
+        // return size - len; // can get the index of the start of the cycle with size
+    }
+    // *****------------***********
 
     private class Node { // actual node instance
         private int value; // value of the current node

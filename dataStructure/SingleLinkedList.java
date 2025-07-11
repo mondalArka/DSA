@@ -1,8 +1,8 @@
 package dataStructure;
 
 public class SingleLinkedList {
-    private Node head; // head will point to an instance of a Node so type is node
-    private Node tail; // tail will point to an instance of a Node so type is node
+    public Node head; // head will point to an instance of a Node so type is node
+    public Node tail; // tail will point to an instance of a Node so type is node
     private int size; // increment the size when something is added or may be removed
 
     SingleLinkedList() {
@@ -221,6 +221,95 @@ public class SingleLinkedList {
             Node node = new Node(temp2.value);
             node.next = mergeList(temp1, temp2.next);
             return node;
+        }
+    }
+
+    public boolean isInCycle(Node head) { // *****VIMP check whether cycle exists or not.Complexity O(n). fast slow
+                                          // pointer method.
+        Node f = head;
+        Node s = head;
+        boolean flag = false;
+        int count = 1;
+        while (f != null && f.next.next != null) {
+            System.out.println(count + " counter");
+            f = f.next.next;
+            s = s.next;
+            if (f == s)
+                return !flag;
+            count++;
+        }
+        return flag;
+    }
+
+    public int getMiddleNode(Node head) {
+        Node f = head;
+        Node s = head;
+        while (f != null && f.next != null) {
+            f = f.next.next;
+            s = s.next;
+        }
+        return s.value;
+    }
+
+    public Node getMiddleNodes(Node head) {
+        Node f = head;
+        Node s = head;
+        while (f != null && f.next != null) {
+            f = f.next.next;
+            s = s.next;
+        }
+        return s;
+    }
+
+    public SingleLinkedList sort(Node head) {
+        try {
+            Node temp = head;
+            SingleLinkedList newList = new SingleLinkedList();
+            while (temp.next != null)
+                temp = temp.next;
+
+            System.out.println("head " + head.value + " tail " + temp.value + "out class");
+            sortInAction(head, temp, newList);
+            return newList;
+        } catch (Exception e) {
+            System.out.println(e + " trace");
+            return null;
+        }
+    }
+
+    private void sortInAction(Node head, Node tail, SingleLinkedList newList) {
+        if (head == null || head.next == tail)
+            return;
+        System.out.println("head " + head.value + " tail " + tail.value);
+        Node temp = head;
+        SingleLinkedList newList1 = new SingleLinkedList();
+        Node mid = getMiddleNodes(temp);
+        newList1.head = head;
+        newList1.tail = mid;
+        sortInAction(newList1.head, newList1.tail, newList); // left side
+        sortInAction(mid.next, tail, newList); // right side
+        merge(head, mid, tail, newList);
+    }
+
+    private void merge(Node head, Node mid, Node tail, SingleLinkedList newList) {
+        Node temp = head;
+        Node tailTemp = mid;
+        while (temp != mid.next && tailTemp != tail.next && temp != null && tailTemp != null) {
+            if (temp.value < tailTemp.value) {
+                newList.addLast(temp.value);
+                temp = temp.next;
+            } else {
+                newList.addLast(tailTemp.value);
+                tailTemp = tailTemp.next;
+            }
+        }
+        while (temp != mid.next && temp != null) {
+            newList.addLast(temp.value);
+            temp = temp.next;
+        }
+        while (tailTemp != tail.next && tailTemp != null) {
+            newList.addLast(tailTemp.value);
+            tailTemp = tailTemp.next;
         }
     }
 

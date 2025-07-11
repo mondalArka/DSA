@@ -16,14 +16,22 @@ public class implementSingleLL {
         list.addLast(3);
         // list.addLast(5);
         list1.addLast(1);
-        list1.addLast(2);
+        list1.addLast(4);
+        list1.addLast(5);
+        // list1.addLast(3);
 
-        list1.addLast(9);
-        list1.addLast(14);
+        // list1.addLast(9);
+        // list1.addLast(14);
         list.display();
         list1.display();
-        SingleLinkedList newList = list.merge(list.head, list1.head); // to work this make public head in singleLL class otherwise cant access it
-        newList.display();
+        
+        // SingleLinkedList newList = list1.sort(list1.head);
+        // newList.display();
+        // SingleLinkedList newList = list.merge(list.head, list1.head); // to work this
+        // make public head in singleLL class otherwise cant access it
+        // newList.display();
+        System.out.println(list1.getMiddleNode(list1.head));
+        // System.out.println(newList.isInCycle(list1.head));
         // list.insertAfterIndex(13, 0);
         // list.insertBeforeIndex(4, 1);
         // list.display();
@@ -34,7 +42,8 @@ public class implementSingleLL {
         // list.deleteIndex(0);
         // list.display();
         // System.out.println("Size is " + list.getSize());
-        // System.out.println("Next node is " + list.getNextNode(30)); // node not exists
+        // System.out.println("Next node is " + list.getNextNode(30)); // node not
+        // exists
         // list.insert(3, 5);
         // list.distinct();
         // list.display();
@@ -49,7 +58,7 @@ public class implementSingleLL {
         // dl.addLast(11);
         // dl.addFirst(8);
         // dl.display();
-        // System.out.println("Size  before is " + dl.getSize());
+        // System.out.println("Size before is " + dl.getSize());
         // dl.insertAfterIndex(45, 1);
         // dl.display();
         // dl.insertBeforeIndex(33, 4);
@@ -64,11 +73,16 @@ public class implementSingleLL {
         // System.out.println("Size is " + dl.getSize());
         // System.out.println("Get prev node "+ dl.getPrevNode(0));
 
-        // CircularLinkedList cl = new CircularLinkedList();
+        CircularLinkedList cl = new CircularLinkedList();
         // cl.addFirst(5);
         // cl.addFirst(4);
         // cl.addFirst(3);
         // cl.addFirst(2);
+        // cl.addFirst(1);
+        // cl.display();
+        // System.out.println(cl.isInCycle(cl.head));
+        // System.out.println(cl.lengthOfCycle(cl.head)+" length of cycle");
+        // System.out.println(cl.getIndexofStartCycle(cl.head)+" index of start cycle");
         // cl.addFirst(1);
         // cl.addLast(7);
         // cl.display();

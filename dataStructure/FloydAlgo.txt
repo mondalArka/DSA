@@ -1,0 +1,7 @@
+used on linked list:
+
+1. Uses fast and slow pointers, f & s. f increses by 2 and s by 1.
+2. Used to check whether a circular linked linked list is present if fast and slow meets.
+3. Used in finding the length of the circular linked list. First detect whether it has circular or not. Then fix the f and start iterating s and when it reaches f after traveling the nodes count those nodes to give the length of the circular nodes.
+4. Used to find the starting circular index positon. First detect whether circular is present then take another pointer temp from head. Increment the temp by 1 and s by 1 where they meet is the starting circular index.
+5. Used to find the middle index of any linked list excpecially if even number of nodes are present then it finds the second middle node always.

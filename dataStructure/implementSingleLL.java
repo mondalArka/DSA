@@ -13,24 +13,37 @@ public class implementSingleLL {
         // list.addFirst(60);
         // list.addFirst(60);
         list.addLast(1);
-        list.addLast(3);
+        list.addLast(7);
         // list.addLast(5);
         list1.addLast(1);
-        list1.addLast(4);
-        list1.addLast(5);
+        list1.addLast(8);
+        list1.addLast(3);
+        list1.addLast(2);
+        list1.addLast(3);
+        SingleLinkedList merge = list.merge(list.head, list1.head);
+        // merge.display();
+        list1.display();
+        list1.sortAction(list1.head);
+        list1.display();
+        list1.reversePart(list1.head, 1, 2);
+        list1.display();
+        // list1.reverse(list1);
+        // list1.display();
+        // SingleLinkedList sorted = list1.sort(list1.head);
+        // sorted.display();
         // list1.addLast(3);
 
         // list1.addLast(9);
         // list1.addLast(14);
-        list.display();
-        list1.display();
+        // list.display();
+        // list1.display();
         
         // SingleLinkedList newList = list1.sort(list1.head);
         // newList.display();
         // SingleLinkedList newList = list.merge(list.head, list1.head); // to work this
         // make public head in singleLL class otherwise cant access it
         // newList.display();
-        System.out.println(list1.getMiddleNode(list1.head));
+        // System.out.println(list1.getMiddleNode(list1.head));
         // System.out.println(newList.isInCycle(list1.head));
         // list.insertAfterIndex(13, 0);
         // list.insertBeforeIndex(4, 1);

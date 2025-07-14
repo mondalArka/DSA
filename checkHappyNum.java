@@ -26,7 +26,7 @@ public class checkHappyNum {
 
     }
 
-    static int findSquareSum(int n) { // find sum of square ofeach number 
+    static int findSquareSum(int n) { // find sum of square of each number 
         int q = n;
         int r, sum = 0;
         while (n != 0) {

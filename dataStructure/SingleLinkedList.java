@@ -261,56 +261,43 @@ public class SingleLinkedList {
         return s;
     }
 
+    public void sortAction(Node head) {
+        // if(head != null && head.next != null)
+        // return null;
+
+        Node temp = head;
+        boolean swapped = false;
+        do { // bubble sort
+            swapped = false;
+            temp = head;
+            do {
+                if (temp.next == null)
+                    return;
+                // System.out.println("xxxxxx");
+                // System.out.println(temp.value + " old");
+                swapped = false;
+                if (temp.value > temp.next.value) {
+                    int tempVal = temp.value;
+                    temp.value = temp.next.value;
+                    temp.next.value = tempVal;
+                    swapped = true;
+                }
+                // System.out.println(temp.value+" old "+temp.next.value);
+                temp = temp.next;
+                // System.out.println(temp.value+" new "+temp.next.value);
+            } while ((temp != null && temp.next != null));
+        } while (swapped);
+    }
+
     public SingleLinkedList sort(Node head) {
-        try {
-            Node temp = head;
-            SingleLinkedList newList = new SingleLinkedList();
-            while (temp.next != null)
-                temp = temp.next;
-
-            System.out.println("head " + head.value + " tail " + temp.value + "out class");
-            sortInAction(head, temp, newList);
-            return newList;
-        } catch (Exception e) {
-            System.out.println(e + " trace");
-            return null;
-        }
-    }
-
-    private void sortInAction(Node head, Node tail, SingleLinkedList newList) {
-        if (head == null || head.next == tail)
-            return;
-        System.out.println("head " + head.value + " tail " + tail.value);
-        Node temp = head;
-        SingleLinkedList newList1 = new SingleLinkedList();
-        Node mid = getMiddleNodes(temp);
-        newList1.head = head;
-        newList1.tail = mid;
-        sortInAction(newList1.head, newList1.tail, newList); // left side
-        sortInAction(mid.next, tail, newList); // right side
-        merge(head, mid, tail, newList);
-    }
-
-    private void merge(Node head, Node mid, Node tail, SingleLinkedList newList) {
-        Node temp = head;
-        Node tailTemp = mid;
-        while (temp != mid.next && tailTemp != tail.next && temp != null && tailTemp != null) {
-            if (temp.value < tailTemp.value) {
-                newList.addLast(temp.value);
-                temp = temp.next;
-            } else {
-                newList.addLast(tailTemp.value);
-                tailTemp = tailTemp.next;
-            }
-        }
-        while (temp != mid.next && temp != null) {
-            newList.addLast(temp.value);
-            temp = temp.next;
-        }
-        while (tailTemp != tail.next && tailTemp != null) {
-            newList.addLast(tailTemp.value);
-            tailTemp = tailTemp.next;
-        }
+        Node left = getMiddleNodes(head);
+        Node right = getMiddleNodes(left.next);
+        SingleLinkedList newList = new SingleLinkedList();
+        System.out.println("left " + left.value + " right " + right.value);
+        sortAction(left);
+        sortAction(right);
+        newList.head = mergeList(left, right);
+        return newList;
     }
 
     // *****------------***********
@@ -321,6 +308,68 @@ public class SingleLinkedList {
             temp = temp.next;
         }
         System.out.println("END");
+    }
+
+    public SingleLinkedList reverse(SingleLinkedList list) {
+        // SingleLinkedList list = new SingleLinkedList();
+        // Node tempHead = list.head;
+        // list.head = reverseAction(tempHead);
+        // list.tail = tempHead; // using loop technique
+        reverseRecursion(list.head); // using recursion
+        return list;
+
+    }
+
+    public Node reverseAction(Node head) {
+        Node temp = head;
+        Node current = temp.next;
+        Node prev = null;
+
+        while (current != null) {
+            temp.next = prev;
+            prev = temp;
+            temp = current;
+            current = current.next;
+        }
+
+        // Final node still needs its pointer reversed
+        temp.next = prev;
+
+        return temp; // temp is now the new head
+    }
+
+    public void reverseRecursion(Node node) {
+        if (node == tail) {
+            head = tail;
+            return;
+        }
+
+        reverseRecursion(node.next);
+        tail.next = node;
+        tail = node;
+        tail.next = null;
+    }
+
+    public void reversePart(Node head, int left, int right) {
+        if ((left == right) || (left > right))
+            return;
+        Node leftHead = head;
+        Node rightHead = head;
+        int i = 0;
+        while (i != left) {
+            leftHead = leftHead.next;
+            i++;
+        }
+        i = 0;
+        while (i != right) {
+            rightHead = rightHead.next;
+            i++;
+        }
+        int val;
+        val = leftHead.value;
+        leftHead.value = rightHead.value;
+        rightHead.value = val;
+        reversePart(head, left + 1, right - 1);
     }
 
     private class Node { // actual node instance

@@ -372,6 +372,57 @@ public class SingleLinkedList {
         reversePart(head, left + 1, right - 1);
     }
 
+    public boolean isPalindrome(Node head) {
+        if (head == tail)
+            return true;
+        Node temp = head;
+        Node mid = getMiddleNodes(head);
+        if (mid.next == null) {
+            if (head.value == head.next.value)
+                return true;
+
+            return false;
+        }
+        ;
+        temp = mid.next;
+        Node befMid = head;
+
+        while (befMid.next != temp)
+            befMid = befMid.next;
+
+        Node revHead = reverseAction(temp);
+        befMid.next = revHead;
+        Node s = head;
+        Node f = revHead;
+        while (f != null && s.value == f.value) {
+            f = f.next;
+            s = s.next;
+        }
+
+        mid = getMiddleNodes(revHead);
+        befMid.next = reverseAction(revHead);
+        if (f != null)
+            return false;
+
+        return true;
+    }
+
+    public void reOrder(Node head){
+        Node temp =head;
+        Node mid = getMiddleNodes(head);
+        Node rev = reverseAction(mid.next);
+        Node next;
+        Node tempNext;
+        while(temp != null && rev != null){
+            tempNext = temp.next; // 2
+            temp.next = rev; // 1-7
+            next = rev.next; // 6
+            temp.next.next  = tempNext; // 1-7-2
+            temp = temp.next.next; // 
+            rev = next;
+        }
+    }
+
     private class Node { // actual node instance
         private int value; // value of the current node
         private Node next; // next points to the a node instance so type is node

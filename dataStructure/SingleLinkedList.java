@@ -408,18 +408,20 @@ public class SingleLinkedList {
     }
 
     public void reOrder(Node head){
-        Node temp =head;
+        if (head == null || head.next == null) return;
+        Node first =head;
         Node mid = getMiddleNodes(head);
-        Node rev = reverseAction(mid.next);
-        Node next;
-        Node tempNext;
-        while(temp != null && rev != null){
-            tempNext = temp.next; // 2
-            temp.next = rev; // 1-7
-            next = rev.next; // 6
-            temp.next.next  = tempNext; // 1-7-2
-            temp = temp.next.next; // 
-            rev = next;
+        Node second = reverseAction(mid.next);
+        mid.next= null;
+        while(second!=null){
+            Node temp1 = first.next;
+            Node temp2 = second.next;
+
+            first.next = second;
+            second.next = temp1;
+
+            first = temp1;
+            second = temp2;
         }
     }
 

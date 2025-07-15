@@ -16,12 +16,12 @@ public class implementSingleLL {
         list.addLast(7);
         // list.addLast(5);
         list1.addLast(1);
-        list1.addLast(3);
+        list1.addLast(2);
         list1.addLast(3);
         // list1.addLast(5);
-        list1.addLast(3);
-        list1.addLast(3);
-        list1.addLast(2);
+        list1.addLast(5);
+        list1.addLast(6);
+        list1.addLast(7);
         SingleLinkedList merge = list.merge(list.head, list1.head);
         // merge.display();
         list1.display();
